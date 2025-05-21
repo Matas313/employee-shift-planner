@@ -16,9 +16,9 @@ Darbuotojų Pamainų Planavimo Sistema
 💻 Naudojamos technologijos
 Frontend: React / HTML / CSS / JavaScript
 
-Backend: Node.js / Express
+Backend: Java
 
-Duomenų bazė: MongoDB
+Duomenų bazė: MySQL Workbench
 
 Kitos bibliotekos: Mongoose, JWT, bcrypt ir kt.
 
