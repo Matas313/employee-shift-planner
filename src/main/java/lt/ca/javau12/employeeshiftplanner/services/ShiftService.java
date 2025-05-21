@@ -1,8 +1,10 @@
 package lt.ca.javau12.employeeshiftplanner.services;
 
 import lt.ca.javau12.employeeshiftplanner.dto.ShiftDTO;
+import lt.ca.javau12.employeeshiftplanner.entities.Employee;
 import lt.ca.javau12.employeeshiftplanner.entities.Shift;
 import lt.ca.javau12.employeeshiftplanner.mappers.ShiftMapper;
+import lt.ca.javau12.employeeshiftplanner.repositories.EmployeeRepository;
 import lt.ca.javau12.employeeshiftplanner.repositories.ShiftRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,12 @@ public class ShiftService {
 
     private final ShiftRepository shiftRepository;
     private final ShiftMapper shiftMapper;
+    private final EmployeeRepository employeeRepository;
 
-    public ShiftService(ShiftRepository shiftRepository, ShiftMapper shiftMapper) {
+    public ShiftService(ShiftRepository shiftRepository, ShiftMapper shiftMapper, EmployeeRepository employeeRepository) {
         this.shiftRepository = shiftRepository;
         this.shiftMapper = shiftMapper;
+        this.employeeRepository = employeeRepository;
     }
 
     public List<ShiftDTO> getAll() {
@@ -36,4 +40,32 @@ public class ShiftService {
         Shift entity = shiftMapper.toEntity(dto);
         return shiftMapper.toDto(shiftRepository.save(entity));
     }
+
+    public List<ShiftDTO> getShiftsById(Long employeeId) {
+        return shiftRepository.findAll()
+                .stream()
+                .filter(shift -> {
+                    return shift.getEmployee() != null && shift.getEmployee().getId().equals(employeeId);
+                })
+                .map(shiftMapper::toDto)
+                .toList();
+    }
+    public List<ShiftDTO> getShiftsByEmployeeId(Long employeeId) {
+        return shiftRepository.findByEmployeeId(employeeId)
+                .stream()
+                .map(shiftMapper::toDto)
+                .toList();
+    }
+
+    public ShiftDTO assignShiftToEmployee(Long shiftId, Long employeeId) {
+        Shift shift = shiftRepository.findById(shiftId)
+                .orElseThrow(() -> new RuntimeException("Pamaina nerasta"));
+
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new RuntimeException("Darbuotojas nerastas"));
+
+        shift.setEmployee(employee);
+        return shiftMapper.toDto(shiftRepository.save(shift));
+    }
+
 }
