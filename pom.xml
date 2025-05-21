@@ -5,14 +5,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.0</version>
+        <version>3.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>lt.ca.javau12</groupId>
-    <artifactId>ShiftPlanner</artifactId>
+    <artifactId>EmployeeShiftPlanner</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ShiftPlanner</name>
-    <description>ShiftPlanner</description>
+    <name>Employee Shift Planner</name>
+    <description>Employee Shift Planner</description>
     <url/>
     <licenses>
         <license/>
