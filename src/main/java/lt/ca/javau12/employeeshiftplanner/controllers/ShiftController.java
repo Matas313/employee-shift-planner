@@ -1,6 +1,7 @@
 package lt.ca.javau12.employeeshiftplanner.controllers;
 
 import lt.ca.javau12.employeeshiftplanner.dto.ShiftDTO;
+import lt.ca.javau12.employeeshiftplanner.entities.AssignShiftRequest;
 import lt.ca.javau12.employeeshiftplanner.services.ShiftService;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -33,4 +34,16 @@ public class ShiftController {
                 .status(HttpStatusCode.valueOf(201))
                 .body(shiftService.create(dto));
     }
+    @GetMapping("/employee/{id}")
+    public ResponseEntity<List<ShiftDTO>> getEmployeeShifts(@PathVariable Long id) {
+        return ResponseEntity.ok(shiftService.getShiftsById(id));
+    }
+    @PostMapping("/assign")
+    public ResponseEntity<ShiftDTO> assignShift(@RequestBody AssignShiftRequest request) {
+        return ResponseEntity.ok(shiftService.assignShiftToEmployee(
+                request.getShiftId(), request.getEmployeeId()
+        ));
+    }
+
+
 }
