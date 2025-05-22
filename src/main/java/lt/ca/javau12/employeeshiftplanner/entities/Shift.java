@@ -1,6 +1,5 @@
 package lt.ca.javau12.employeeshiftplanner.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -13,15 +12,15 @@ import java.time.LocalDateTime;
         private Long id;
 
         private String name;
-        private LocalDateTime startTime;
-        private LocalDateTime endTime;
+        private int startTime;
+        private int endTime;
 
         @ManyToOne
         @JoinColumn(name = "employee_id")
         private Employee employee;
 
         public Shift(){}
-        public Shift(String name, LocalDateTime startTime, LocalDateTime endTime) {
+        public Shift(String name, int startTime, int endTime) {
             this.name = name;
             this.startTime = startTime;
             this.endTime = endTime;
@@ -35,19 +34,19 @@ import java.time.LocalDateTime;
             this.id = id;
         }
 
-        public LocalDateTime getStartTime() {
+        public int getStartTime() {
             return startTime;
         }
 
-        public void setStartTime(LocalDateTime startTime) {
+        public void setStartTime(int startTime) {
             this.startTime = startTime;
         }
 
-        public LocalDateTime getEndTime() {
+        public int getEndTime() {
             return endTime;
         }
 
-        public void setEndTime(LocalDateTime endTime) {
+        public void setEndTime(int endTime) {
             this.endTime = endTime;
         }
 
