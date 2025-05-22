@@ -9,13 +9,13 @@ public class ShiftDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long Id;
 
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private int startTime;
+    private int endTime;
     private String name;
 
     public ShiftDTO() {}
 
-    public ShiftDTO(Long Id, LocalDateTime startTime, LocalDateTime endTime, String  name) {
+    public ShiftDTO(Long Id, int startTime, int endTime, String  name) {
         this.Id = Id;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -30,19 +30,19 @@ public class ShiftDTO {
         this.Id = shiftId;
     }
 
-    public LocalDateTime getStartTime() {
+    public int getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(int startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public int getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(int endTime) {
         this.endTime = endTime;
     }
 

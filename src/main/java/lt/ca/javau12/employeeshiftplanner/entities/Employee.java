@@ -16,7 +16,7 @@ public class Employee {
         private String name;
         private String email;
         private String phone;
-        private String position;
+        private String possition;
 
 
     @OneToMany(mappedBy = "employee")
@@ -26,11 +26,11 @@ public class Employee {
     public Employee() {}
 
 
-    public Employee(String name, String email, String phone, String position) {
+    public Employee(String name, String email, String phone, String possition) {
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.position = position;
+        this.possition = possition;
     }
 
 
@@ -67,12 +67,12 @@ public class Employee {
         this.phone = phone;
     }
 
-    public String getPosition() {
-        return position;
+    public String getPossition() {
+        return possition;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setPossition(String possition) {
+        this.possition = possition;
     }
 
     public List<Shift> getShifts() {

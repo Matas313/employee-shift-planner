@@ -13,7 +13,7 @@ public class EmployeeMapper {
                 entity.getName(),
                 entity.getEmail(),
                 entity.getPhone(),
-                entity.getPosition()
+                entity.getPossition()
         );
     }
 
