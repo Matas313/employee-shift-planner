@@ -2,7 +2,7 @@ package lt.ca.javau12.employeeshiftplanner.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class EmployeeDTO {
+public class AdminDTO {
 
     @JsonProperty (access = JsonProperty.Access.READ_ONLY)
     private Long id;
@@ -12,8 +12,8 @@ public class EmployeeDTO {
     private String phone;
     private String position;
 
-    public EmployeeDTO() {}
-    public EmployeeDTO(Long id, String name, String email, String phone, String position) {
+    public AdminDTO() {}
+    public AdminDTO(Long id, String name, String email, String phone, String position) {
         this.id = id;
         this.name = name;
         this.email = email;

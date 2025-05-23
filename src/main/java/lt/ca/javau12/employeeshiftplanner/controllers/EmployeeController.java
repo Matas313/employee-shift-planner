@@ -22,23 +22,8 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<EmployeeDTO>> getAllEmployees(){
-        return ResponseEntity.ok(employeeService.getAll());
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable Long id){
         return ResponseEntity.of(employeeService.byId(id));
-    }
-    @PostMapping
-    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO dto){
-        return ResponseEntity.status(HttpStatus.valueOf(201))
-                .body(employeeService.create(dto));
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Employee> deleteEmployee(@PathVariable int id){
-        employeeService.delete(id);
-        return ResponseEntity.noContent().build();
     }
 }
