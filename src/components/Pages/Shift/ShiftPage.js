@@ -4,7 +4,7 @@ import DeleteShift from "./DeleteShift"
 function ShiftPage() {
   return (
     <div>
-      <h2>Darbuotojai</h2>
+      <h2>Pamainos</h2>
       <ShiftForm />
       <DeleteShift />
     </div>
