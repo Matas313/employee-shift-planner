@@ -68,4 +68,11 @@ public class ShiftService {
         return shiftMapper.toDto(shiftRepository.save(shift));
     }
 
+    public boolean delete(Long id) {
+        if(!shiftRepository.existsById(id)) {
+            return false;
+        }
+        shiftRepository.deleteById(id);
+        return true;
+    }
 }

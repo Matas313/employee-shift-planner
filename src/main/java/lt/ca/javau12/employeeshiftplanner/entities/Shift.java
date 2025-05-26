@@ -4,27 +4,28 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-    @Entity
-    public class Shift {
+@Entity
+public class Shift {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        private String name;
-        private int startTime;
-        private int endTime;
+    private String name;
+    private int startTime;
+    private int endTime;
 
-        @ManyToOne
-        @JoinColumn(name = "employee_id")
-        private Employee employee;
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
-        public Shift(){}
-        public Shift(String name, int startTime, int endTime) {
-            this.name = name;
-            this.startTime = startTime;
-            this.endTime = endTime;
-        }
+    public Shift() {}
+
+    public Shift(String name, int startTime, int endTime) {
+        this.name = name;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 
         public Long getId() {
             return id;
