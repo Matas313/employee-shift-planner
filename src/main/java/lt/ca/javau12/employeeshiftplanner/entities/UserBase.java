@@ -16,25 +16,19 @@ public class UserBase {
     private String name;
     private String email;
     private String phone;
-    private String possition;
-
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String position;
 
     @OneToMany(mappedBy = "employee")
     private List<Shift> shifts;
 
     public UserBase() {}
 
-    public UserBase(String name, String email, String phone, String possition, Role role) {
+    public UserBase(String name, String email, String phone, String position, Role role) {
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.possition = possition;
-        this.role = role;
+        this.position = position;
     }
-
-    // Getters and setters
 
     public Long getId() { return id; }
 
@@ -52,13 +46,8 @@ public class UserBase {
 
     public void setPhone(String phone) { this.phone = phone; }
 
-    public String getPossition() { return possition; }
-
-    public void setPossition(String possition) { this.possition = possition; }
-
-    public Role getRole() { return role; }
-
-    public void setRole(Role role) { this.role = role; }
+    public String getPosition() { return position; }
+    public void setPosition(String position) { this.position = position; }
 
     public List<Shift> getShifts() { return shifts; }
 
