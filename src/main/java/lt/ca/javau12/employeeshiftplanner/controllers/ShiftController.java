@@ -41,10 +41,12 @@ public class ShiftController {
     }
     @PostMapping("/assign")
     public ResponseEntity<ShiftDTO> assignShift(@RequestBody AssignShiftRequest request) {
+        System.out.println("Received assign request: shiftId=" + request.getShiftId() + ", employeeId=" + request.getEmployeeId());
         return ResponseEntity.ok(shiftService.assignShiftToEmployee(
                 request.getShiftId(), request.getEmployeeId()
         ));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAdmin(@PathVariable Long id){
         boolean deleted = shiftService.delete(id);

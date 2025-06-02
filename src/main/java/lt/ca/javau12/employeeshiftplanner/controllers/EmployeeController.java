@@ -1,6 +1,7 @@
 package lt.ca.javau12.employeeshiftplanner.controllers;
 
 import java.io.IOException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import lt.ca.javau12.employeeshiftplanner.dto.EmployeeDTO;
 import lt.ca.javau12.employeeshiftplanner.entities.Employee;

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Shift {
 
@@ -17,7 +19,9 @@ public class Shift {
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
+    @JsonBackReference
     private Employee employee;
+
 
     public Shift() {}
 

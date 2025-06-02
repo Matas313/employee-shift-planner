@@ -57,7 +57,7 @@ public class EmployeeDTO {
         return position;
     }
 
-    public void setPosition(String possition) {
-        this.position = possition;
+    public void setPosition(String position) {
+        this.position = position;
     }
 }

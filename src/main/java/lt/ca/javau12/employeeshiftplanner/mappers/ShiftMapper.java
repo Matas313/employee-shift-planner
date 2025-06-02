@@ -10,8 +10,8 @@ public class ShiftMapper {
     public ShiftDTO toDto(Shift entity) {
         return new ShiftDTO(
                 entity.getId(),
-                entity.getEndTime(),
                 entity.getStartTime(),
+                entity.getEndTime(),
                 entity.getName()
         );
     }

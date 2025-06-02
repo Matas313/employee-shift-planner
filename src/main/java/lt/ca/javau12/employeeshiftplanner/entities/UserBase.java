@@ -1,5 +1,6 @@
 package lt.ca.javau12.employeeshiftplanner.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
@@ -16,25 +17,27 @@ public class UserBase {
     private String name;
     private String email;
     private String phone;
-    private String possition;
+    private String position;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Shift> shifts;
+
+
 
     public UserBase() {}
 
-    public UserBase(String name, String email, String phone, String possition, Role role) {
+    public UserBase(String name, String email, String phone, String position, Role role) {
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.possition = possition;
+        this.position = position;
         this.role = role;
     }
 
-    // Getters and setters
 
     public Long getId() { return id; }
 
@@ -52,9 +55,9 @@ public class UserBase {
 
     public void setPhone(String phone) { this.phone = phone; }
 
-    public String getPossition() { return possition; }
+    public String getPosition() { return position; }
 
-    public void setPossition(String possition) { this.possition = possition; }
+    public void setPosition(String position) { this.position = position; }
 
     public Role getRole() { return role; }
 
