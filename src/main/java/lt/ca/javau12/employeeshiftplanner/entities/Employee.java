@@ -6,20 +6,25 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
 import java.util.List;
 
-    @Entity
-    public class Employee extends UserBase {
-
-    private String position;
+@Entity
+@DiscriminatorValue("EMPLOYEE")
+public class Employee extends UserBase {
 
     @OneToMany(mappedBy = "employee")
     private List<Shift> shifts;
 
-        public Employee(String name, String email, String phone, String position) {
-            super(name, email, phone, position, null);
-        }
+    public Employee(String name, String email, String phone, String position) {
+        super(name, email, phone, position, null);
+    }
 
+    public Employee() {
+    }
 
-        public Employee() {
+    public List<Shift> getShifts() {
+        return shifts;
+    }
 
-        }
+    public void setShifts(List<Shift> shifts) {
+        this.shifts = shifts;
+    }
 }

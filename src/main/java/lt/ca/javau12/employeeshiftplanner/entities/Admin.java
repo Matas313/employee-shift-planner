@@ -6,15 +6,19 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@DiscriminatorValue("ADMIN")
 public class Admin extends UserBase {
 
     private String position;
 
-    @OneToMany(mappedBy = "employee")
-    private List<Shift> shifts;
 
     public Admin(String name, String email, String phone, String position) {
+        this.setName(name);
+        this.setEmail(email);
+        this.setPhone(phone);
+        this.position = position;
     }
+
 
     public Admin() {
 
@@ -23,7 +27,5 @@ public class Admin extends UserBase {
     public String getPosition() { return position; }
     public void setPosition(String position) { this.position = position; }
 
-    public List<Shift> getShifts() { return shifts; }
-    public void setShifts(List<Shift> shifts) { this.shifts = shifts; }
 }
 

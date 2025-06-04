@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-public class UserBase {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)
+public abstract  class UserBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +19,6 @@ public class UserBase {
     private String email;
     private String phone;
     private String position;
-
-    @OneToMany(mappedBy = "employee")
-    private List<Shift> shifts;
 
     public UserBase() {}
 
@@ -49,7 +48,4 @@ public class UserBase {
     public String getPosition() { return position; }
     public void setPosition(String position) { this.position = position; }
 
-    public List<Shift> getShifts() { return shifts; }
-
-    public void setShifts(List<Shift> shifts) { this.shifts = shifts; }
 }

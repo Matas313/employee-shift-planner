@@ -5,13 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ShiftDTO {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Long id;  // mažosiomis, kad JSON būtų "id"
+    private Long id;
 
     private int startTime;
     private int endTime;
     private String name;
 
-    // jei reikia, gali pridėti employee
     private EmployeeDTO employee;
 
     public ShiftDTO() {}

@@ -38,9 +38,9 @@ public class AdminController {
         return ResponseEntity.ok(employeeService.getAllEmployees());
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<AdminDTO> createAdmin(@RequestBody AdminDTO dto){
-        AdminDTO created = adminService.create(dto);
+        AdminDTO created = adminService.createAdmin(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
     @PostMapping("/addemployees")

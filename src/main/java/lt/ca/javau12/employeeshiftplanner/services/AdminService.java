@@ -29,7 +29,7 @@ public class AdminService {
                 .toList();
     }
 
-    public AdminDTO create(AdminDTO dto) {
+    public AdminDTO createAdmin(AdminDTO dto) {
         Admin entity = adminMapper.toEntity(dto);
         return adminMapper.toDto(adminRepository.save(entity));
     }

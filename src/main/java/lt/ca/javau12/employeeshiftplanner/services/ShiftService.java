@@ -3,9 +3,12 @@ package lt.ca.javau12.employeeshiftplanner.services;
 import lt.ca.javau12.employeeshiftplanner.dto.ShiftDTO;
 import lt.ca.javau12.employeeshiftplanner.entities.Employee;
 import lt.ca.javau12.employeeshiftplanner.entities.Shift;
+import lt.ca.javau12.employeeshiftplanner.entities.UserBase;
 import lt.ca.javau12.employeeshiftplanner.mappers.ShiftMapper;
 import lt.ca.javau12.employeeshiftplanner.repositories.EmployeeRepository;
 import lt.ca.javau12.employeeshiftplanner.repositories.ShiftRepository;
+import lt.ca.javau12.employeeshiftplanner.repositories.UserRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +20,13 @@ public class ShiftService {
     private final ShiftRepository shiftRepository;
     private final ShiftMapper shiftMapper;
     private final EmployeeRepository employeeRepository;
+    private final UserRepository userRepository;
 
-    public ShiftService(ShiftRepository shiftRepository, ShiftMapper shiftMapper, EmployeeRepository employeeRepository) {
+    public ShiftService(ShiftRepository shiftRepository, ShiftMapper shiftMapper, EmployeeRepository employeeRepository, UserRepository userRepository) {
         this.shiftRepository = shiftRepository;
         this.shiftMapper = shiftMapper;
         this.employeeRepository = employeeRepository;
+        this.userRepository = userRepository;
     }
 
     public List<ShiftDTO> getAll() {
@@ -59,14 +64,22 @@ public class ShiftService {
 
     public ShiftDTO assignShiftToEmployee(Long shiftId, Long employeeId) {
         Shift shift = shiftRepository.findById(shiftId)
-                .orElseThrow(() -> new RuntimeException("Pamaina nerasta"));
+            .orElseThrow(() -> new RuntimeException("Shift not found"));
 
-        Employee employee = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new RuntimeException("Darbuotojas nerastas"));
+        UserBase user = userRepository.findById(employeeId)
+            .orElseThrow(() -> new RuntimeException("User not found"));
 
-        shift.setEmployee(employee);
-        return shiftMapper.toDto(shiftRepository.save(shift));
+        if (!(user instanceof Employee)) {
+            throw new RuntimeException("User is not an Employee");
+        }
+
+        shift.setEmployee((Employee) user);
+        Shift savedShift = shiftRepository.save(shift);
+        return shiftMapper.toDto(savedShift);
     }
+
+
+
 
     public boolean delete(Long id) {
         if(!shiftRepository.existsById(id)) {
