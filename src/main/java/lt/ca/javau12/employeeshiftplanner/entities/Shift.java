@@ -2,6 +2,7 @@ package lt.ca.javau12.employeeshiftplanner.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,8 +13,9 @@ public class Shift {
     private Long id;
 
     private String name;
-    private int startTime;
-    private int endTime;
+    private LocalDate shiftDate;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
@@ -21,8 +23,9 @@ public class Shift {
 
     public Shift() {}
 
-    public Shift(String name, int startTime, int endTime) {
+    public Shift(String name,LocalDate shiftDate, LocalDateTime startTime, LocalDateTime endTime) {
         this.name = name;
+        this.shiftDate = shiftDate;
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -34,20 +37,29 @@ public class Shift {
         public void setId(Long id) {
             this.id = id;
         }
+        
 
-        public int getStartTime() {
+        public LocalDate getShiftDate() {
+			return shiftDate;
+		}
+
+		public void setShiftDate(LocalDate shiftDate) {
+			this.shiftDate = shiftDate;
+		}
+
+		public LocalDateTime getStartTime() {
             return startTime;
         }
 
-        public void setStartTime(int startTime) {
+        public void setStartTime(LocalDateTime startTime) {
             this.startTime = startTime;
         }
 
-        public int getEndTime() {
+        public LocalDateTime getEndTime() {
             return endTime;
         }
 
-        public void setEndTime(int endTime) {
+        public void setEndTime(LocalDateTime endTime) {
             this.endTime = endTime;
         }
 

@@ -10,19 +10,27 @@ public class EmployeeMapper {
     public EmployeeDTO toDto(Employee entity) {
         return new EmployeeDTO(
                 entity.getId(),
-                entity.getName(),
+                entity.getFirstName(),
+                entity.getLastName(),
                 entity.getEmail(),
                 entity.getPhone(),
-                entity.getPosition()
+                entity.getPosition(),
+                entity.getPassword(),
+                0.0,
+                entity.getRole()
+
         );
     }
 
     public Employee toEntity(EmployeeDTO dto) {
         return new Employee(
-                dto.getName(),
+                dto.getFirstName(),
+                dto.getLastName(),
                 dto.getEmail(),
                 dto.getPhone(),
-                dto.getPosition()
+                dto.getPosition(),
+                dto.getPassword(),
+                dto.getRole()
         );
     }
 

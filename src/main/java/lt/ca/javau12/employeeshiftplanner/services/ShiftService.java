@@ -7,10 +7,13 @@ import lt.ca.javau12.employeeshiftplanner.entities.UserBase;
 import lt.ca.javau12.employeeshiftplanner.mappers.ShiftMapper;
 import lt.ca.javau12.employeeshiftplanner.repositories.EmployeeRepository;
 import lt.ca.javau12.employeeshiftplanner.repositories.ShiftRepository;
-import lt.ca.javau12.employeeshiftplanner.repositories.UserRepository;
+import lt.ca.javau12.employeeshiftplanner.repositories.UserBaseRepository;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,9 +23,9 @@ public class ShiftService {
     private final ShiftRepository shiftRepository;
     private final ShiftMapper shiftMapper;
     private final EmployeeRepository employeeRepository;
-    private final UserRepository userRepository;
+    private final UserBaseRepository userRepository;
 
-    public ShiftService(ShiftRepository shiftRepository, ShiftMapper shiftMapper, EmployeeRepository employeeRepository, UserRepository userRepository) {
+    public ShiftService(ShiftRepository shiftRepository, ShiftMapper shiftMapper, EmployeeRepository employeeRepository, UserBaseRepository userRepository) {
         this.shiftRepository = shiftRepository;
         this.shiftMapper = shiftMapper;
         this.employeeRepository = employeeRepository;
@@ -88,4 +91,39 @@ public class ShiftService {
         shiftRepository.deleteById(id);
         return true;
     }
+
+    public Optional<ShiftDTO> update(Long id, ShiftDTO dto) {
+        return shiftRepository.findById(id).map(shift -> {
+        	final DateTimeFormatter dateFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        	final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+            LocalDate shiftDate = dto.getShiftDate() != null
+                    ? LocalDate.parse(dto.getShiftDate(), dateFormatter)
+                    : null;
+
+            LocalDateTime startTime = dto.getStartTime() != null
+                    ? LocalDateTime.parse(dto.getStartTime(), dateTimeFormatter)
+                    : null;
+
+            LocalDateTime endTime = dto.getEndTime() != null
+                    ? LocalDateTime.parse(dto.getEndTime(), dateTimeFormatter)
+                    : null;
+
+            shift.setShiftDate(shiftDate);
+            shift.setStartTime(startTime);
+            shift.setEndTime(endTime);
+            shift.setName(dto.getName());
+
+            if (dto.getEmployee() != null && dto.getEmployee().getId() != null) {
+                employeeRepository.findById(dto.getEmployee().getId())
+                    .ifPresent(shift::setEmployee);
+            } else {
+                shift.setEmployee(null);
+            }
+
+            Shift updated = shiftRepository.save(shift);
+            return shiftMapper.toDto(updated);
+        });
+    }
+
+
 }

@@ -15,29 +15,52 @@ public abstract  class UserBase {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String phone;
     private String position;
+    private String password;
+    
+    @Enumerated(EnumType.STRING)
+    private Role role;
+    
+    private boolean enabled = true;
+
+    public boolean isEnabled() { return enabled; }
 
     public UserBase() {}
 
-    public UserBase(String name, String email, String phone, String position, Role role) {
-        this.name = name;
+    public UserBase(String firstName, String lastName, String email, String phone, String position, String password, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.position = position;
+        this.password = password;
     }
 
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
 
-    public String getName() { return name; }
+    public String getFirstName() {
+		return firstName;
+	}
 
-    public void setName(String name) { this.name = name; }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public String getEmail() { return email; }
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() { return email; }
 
     public void setEmail(String email) { this.email = email; }
 
@@ -47,5 +70,22 @@ public abstract  class UserBase {
 
     public String getPosition() { return position; }
     public void setPosition(String position) { this.position = position; }
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+    
 
 }

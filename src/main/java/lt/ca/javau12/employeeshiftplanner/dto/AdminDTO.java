@@ -2,23 +2,32 @@ package lt.ca.javau12.employeeshiftplanner.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lt.ca.javau12.employeeshiftplanner.entities.Role;
+
 public class AdminDTO {
 
     @JsonProperty (access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String phone;
     private String position;
+    private String password;
+    private Role role;
 
     public AdminDTO() {}
-    public AdminDTO(Long id, String name, String email, String phone, String position) {
+    public AdminDTO(Long id, String firstName, String lastName, String email, String phone, String position, String password, Role role ) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.position = position;
+        this.password = password;
+        this.role = role;
+        
     }
 
     public Long getId() {
@@ -29,15 +38,21 @@ public class AdminDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
+    
+    
+    public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getEmail() {
         return email;
     }
 
@@ -60,4 +75,17 @@ public class AdminDTO {
     public void setPosition(String possition) {
         this.position = possition;
     }
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+    
 }

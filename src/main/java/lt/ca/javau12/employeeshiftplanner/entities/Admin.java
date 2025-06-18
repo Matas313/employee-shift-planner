@@ -12,11 +12,8 @@ public class Admin extends UserBase {
     private String position;
 
 
-    public Admin(String name, String email, String phone, String position) {
-        this.setName(name);
-        this.setEmail(email);
-        this.setPhone(phone);
-        this.position = position;
+    public Admin(String firstName, String lastName ,String email, String phone, String position, String password, Role role) {
+        super(firstName, lastName, email, phone, position, password, role);
     }
 
 
@@ -26,6 +23,7 @@ public class Admin extends UserBase {
 
     public String getPosition() { return position; }
     public void setPosition(String position) { this.position = position; }
+    
 
 }
 

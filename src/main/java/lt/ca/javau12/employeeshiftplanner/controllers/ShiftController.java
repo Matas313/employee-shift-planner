@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -39,12 +40,11 @@ public class ShiftController {
     public ResponseEntity<List<ShiftDTO>> getEmployeeShifts(@PathVariable Long id) {
         return ResponseEntity.ok(shiftService.getShiftsById(id));
     }
-    @PostMapping("/assign")
-    public ResponseEntity<ShiftDTO> assignShift(@RequestBody AssignShiftRequest request) {
-        return ResponseEntity.ok(shiftService.assignShiftToEmployee(
-                request.getShiftId(), request.getEmployeeId()
-        ));
+    @PostMapping("/{id}/assign")
+    public ResponseEntity<ShiftDTO> assignShift(@PathVariable Long id, @RequestBody AssignShiftRequest request) {
+        return ResponseEntity.ok(shiftService.assignShiftToEmployee(id, request.getEmployeeId()));
     }
+
 
 
     @DeleteMapping("/{id}")
@@ -56,5 +56,13 @@ public class ShiftController {
             return ResponseEntity.notFound().build();
         }
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<ShiftDTO> updateShift(@PathVariable Long id, @RequestBody ShiftDTO dto) {
+        return shiftService.update(id, dto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+
 
 }

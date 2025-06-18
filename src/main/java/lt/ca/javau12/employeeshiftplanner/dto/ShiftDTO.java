@@ -1,5 +1,7 @@
 package lt.ca.javau12.employeeshiftplanner.dto;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ShiftDTO {
@@ -7,16 +9,18 @@ public class ShiftDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
-    private int startTime;
-    private int endTime;
+    private String shiftDate;
+    private String startTime;
+    private String endTime;
     private String name;
 
     private EmployeeDTO employee;
 
     public ShiftDTO() {}
 
-    public ShiftDTO(Long id, int startTime, int endTime, String name, EmployeeDTO employee) {
+    public ShiftDTO(Long id, String shiftDate, String startTime, String endTime, String name, EmployeeDTO employee) {
         this.id = id;
+        this.shiftDate = shiftDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.name = name;
@@ -25,12 +29,19 @@ public class ShiftDTO {
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+    
+    public String getShiftDate() {
+		return shiftDate;
+	}
 
-    public int getStartTime() { return startTime; }
-    public void setStartTime(int startTime) { this.startTime = startTime; }
+	public void setShiftDate(String shiftDate) {
+		this.shiftDate = shiftDate;
+	}
+	public String getStartTime() { return startTime; }
+    public void setStartTime(String startTime) { this.startTime = startTime; }
 
-    public int getEndTime() { return endTime; }
-    public void setEndTime(int endTime) { this.endTime = endTime; }
+    public String getEndTime() { return endTime; }
+    public void setEndTime(String endTime) { this.endTime = endTime; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }

@@ -13,8 +13,8 @@ public class Employee extends UserBase {
     @OneToMany(mappedBy = "employee")
     private List<Shift> shifts;
 
-    public Employee(String name, String email, String phone, String position) {
-        super(name, email, phone, position, null);
+    public Employee(String firstName, String lastName, String email, String phone, String position, String password, Role role) {
+        super(firstName, lastName, email, phone, position, password, role);
     }
 
     public Employee() {
@@ -27,4 +27,5 @@ public class Employee extends UserBase {
     public void setShifts(List<Shift> shifts) {
         this.shifts = shifts;
     }
+    
 }

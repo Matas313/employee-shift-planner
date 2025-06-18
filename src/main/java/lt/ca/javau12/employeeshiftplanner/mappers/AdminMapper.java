@@ -12,21 +12,28 @@ public class AdminMapper {
     public AdminDTO toDto(Admin entity) {
         return new AdminDTO(
                 entity.getId(),
-                entity.getName(),
+                entity.getFirstName(),
+                entity.getLastName(),
                 entity.getEmail(),
                 entity.getPhone(),
-                entity.getPosition()
+                entity.getPosition(),
+                entity.getPassword(),
+                entity.getRole()
         );
     }
 
     public Admin toEntity(AdminDTO dto) {
         return new Admin(
-                dto.getName(),
+                dto.getFirstName(),
+                dto.getLastName(),
                 dto.getEmail(),
                 dto.getPhone(),
-                dto.getPosition()
+                dto.getPosition(),
+                dto.getPassword(),
+                dto.getRole()
         );
     }
+
 
 
 }
